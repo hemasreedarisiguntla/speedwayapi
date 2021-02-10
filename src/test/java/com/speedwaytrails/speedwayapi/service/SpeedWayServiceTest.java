@@ -1,5 +1,6 @@
 package com.speedwaytrails.speedwayapi.service;
 
+import com.speedwaytrails.speedwayapi.entity.Driver;
 import com.speedwaytrails.speedwayapi.entity.RaceCar;
 import com.speedwaytrails.speedwayapi.repository.RaceCarRepository;
 import org.junit.jupiter.api.BeforeEach;
@@ -39,6 +40,13 @@ public class SpeedWayServiceTest {
     }
 
     private List<RaceCar> setUpRaceCarData() {
+        ArrayList<Driver> driverList = new ArrayList<>();
+        Driver driver = Driver.builder()
+                .first_name("abc")
+                .last_name("xyz")
+                .age(27).nickname("a").wins(2).losses(1).build();
+        driverList.add(driver);
+
         List<RaceCar> raceCars = new ArrayList<>();
         RaceCar raceCar = RaceCar.builder().nickname("The Condor")
                 .model("Corvette")
@@ -46,6 +54,7 @@ public class SpeedWayServiceTest {
                 .status("AVAILABLE")
                 .top_speed(189)
                 .type("sports")
+                .driverList(driverList)
                 .build();
 
         raceCars.add(raceCar);
