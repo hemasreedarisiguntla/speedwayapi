@@ -1,5 +1,6 @@
 package com.speedwaytrails.speedwayapi.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -23,6 +24,7 @@ public class Driver {
     private Integer age;
     private String nickname;
     @ManyToMany(mappedBy = "driverList")
+    @JsonIgnore
     private List<RaceCar> cars;
     private Integer wins;
     private Integer losses;
