@@ -1,33 +1,30 @@
 package com.speedwaytrails.speedwayapi.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
-@Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
+@Getter
+@Setter
 public class RaceCar {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String nickname;
     private String model;
-    @ManyToMany(cascade = {
-            CascadeType.PERSIST,
-            CascadeType.MERGE
-    })
+
+    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinTable(name = "racecar_driver",
             joinColumns = @JoinColumn(name = "racecar_id"),
             inverseJoinColumns = @JoinColumn(name = "driver_id")
     )
-    private List<Driver> driverList;
+    private final Set<Driver> driverList =new HashSet<>();
     private String year;
     private String status;
     private Integer top_speed;

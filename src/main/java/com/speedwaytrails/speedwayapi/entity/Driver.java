@@ -1,31 +1,28 @@
 package com.speedwaytrails.speedwayapi.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Set;
 
 @Entity
-@Data
+@Getter
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
 public class Driver {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String first_name;
     private String last_name;
     private Integer age;
     private String nickname;
-    @ManyToMany(mappedBy = "driverList")
+    @ManyToMany(mappedBy = "driverList" , fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JsonIgnore
-    private List<RaceCar> cars;
+    private Set<RaceCar> cars;
     private Integer wins;
     private Integer losses;
 }

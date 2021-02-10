@@ -54,8 +54,8 @@ public class SpeedWayServiceTest {
                 .status("AVAILABLE")
                 .top_speed(189)
                 .type("sports")
-                .driverList(driverList)
                 .build();
+        raceCar.getDriverList().add(driver);
 
         raceCars.add(raceCar);
         return raceCars;
