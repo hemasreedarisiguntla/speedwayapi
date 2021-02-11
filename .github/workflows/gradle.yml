@@ -7,7 +7,7 @@ on:
   push:
     branches: [ master ]
 jobs:
-  build:
+  buildAndDeply:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -21,3 +21,12 @@ jobs:
         run: ./gradlew build
       - name: docker build
         run: docker build . --file Dockerfile --tag speedwaytrails:github.sha
+      - name: heroku deploy
+        uses: akhileshns/heroku-deploy@v3.8.9
+        with:
+          heroku_api_key: c8aff97e-4796-46e5-8723-80ef222bea4b  # Defined in the repository Settings > Secrets
+          heroku_email: balajiachanta@gmail.com
+          heroku_app_name: "speedway-orion" #Must be unique in Heroku
+          usedocker: true
+        
+        
