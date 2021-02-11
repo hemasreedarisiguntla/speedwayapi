@@ -27,6 +27,7 @@ jobs:
       - name: docker build
         run: docker build . --file Dockerfile --tag speedwaytrails:github.sha
   deploy:
+    runs-on: ubuntu-latest
     steps:
       - name: heroku deploy
       - uses: akhileshns/heroku-deploy@v3.8.9
