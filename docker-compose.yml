@@ -1,0 +1,18 @@
+version: '3.3'
+services:
+  postgresdb:
+    image: postgres:latest
+    environment:
+      POSTGRES_PASSWORD: notsecure
+      POSTGRES_DB: speedwaydb
+      POSTGRES_USER: postgres
+    ports:
+      - "5433:5432"
+  speedwayapp:
+    build: .
+    environment:
+      SPRING_PROFILES_ACTIVE: postgres
+    depends_on:
+      - postgresdb
+    ports:
+      - "2999:8080"
